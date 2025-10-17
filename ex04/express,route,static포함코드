@@ -1,0 +1,90 @@
+다음은 `Express`를 이용한 **Hello World 서버 코드** 예시입니다.
+이 예시에는 `route`(라우터)와 `static`(정적 파일 제공) 기능이 모두 포함되어 있습니다.
+
+---
+
+### 📁 프로젝트 구조 예시
+
+```
+myapp/
+ ├── public/
+ │    └── index.html
+ └── app.js
+```
+
+---
+
+### 🟩 1. app.js
+
+```js
+// [1] Express 불러오기
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// [2] 정적 파일(static) 설정
+// public 폴더 안의 파일을 / 경로로 접근 가능하게 함
+app.use(express.static('public'));
+
+// [3] 라우터(route) 설정
+app.get('/', (req, res) => {
+  res.send('Hello World! 🌍');
+});
+
+app.get('/about', (req, res) => {
+  res.send('This is the About page.');
+});
+
+// [4] 서버 실행
+app.listen(port, () => {
+  console.log(`서버 실행 중: http://localhost:${port}`);
+});
+```
+
+---
+
+### 🟦 2. public/index.html
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Express</title>
+</head>
+<body>
+  <h1>안녕하세요! Express 정적 페이지입니다.</h1>
+  <p>이 페이지는 public 폴더의 index.html에서 제공됩니다.</p>
+</body>
+</html>
+```
+
+---
+
+### 🧩 실행 방법
+
+1. 프로젝트 폴더로 이동
+
+   ```
+   cd myapp
+   ```
+2. Express 설치
+
+   ```
+   npm init -y
+   npm install express
+   ```
+3. 서버 실행
+
+   ```
+   node app.js
+   ```
+4. 브라우저에서 접속
+
+   * [http://localhost:3000](http://localhost:3000) → “Hello World!” 출력
+   * [http://localhost:3000/about](http://localhost:3000/about) → “About page” 출력
+   * [http://localhost:3000/index.html](http://localhost:3000/index.html) → 정적 HTML 페이지 표시
+
+---
+
+원하신다면 이 코드를 **ES 모듈(import/export)** 버전으로 바꾼 예시도 함께 드릴까요? (예: `type: "module"` 사용 버전)
